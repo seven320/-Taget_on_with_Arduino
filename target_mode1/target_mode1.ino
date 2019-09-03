@@ -9,8 +9,9 @@ const int LED0 = 13;
 const int LED1 = 12;
 const int LED2 = 11;
 const int LED3 = 10;
-const int SERVO = 8;
-const int TARGET0 = 7;
+
+const int SERVO = 6;
+const int SWITCH = 4;
 
 int mode = -1; // mode 0:手動モード 1:一定間隔モード 2:自動復帰モード 3:ゲームモード
 bool power = false;
@@ -23,7 +24,6 @@ long button_2 = 0xFF18E7;
 long button_3 = 0xFF7A85;
 
 
-
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 
@@ -31,7 +31,7 @@ void setup() {
   Serial.begin(9600);
   irrecv.enableIRIn(); //Start the receiver
   pinMode(RECV_PIN, INPUT); //赤外線センサ
-  pinMode(TARGET0, INPUT);
+
   
   pinMode(LED0, OUTPUT);
   pinMode(LED1, OUTPUT);
@@ -98,13 +98,24 @@ void mode1(){
         irrecv.resume();
       }
     }
-    if(millis()-prev > 3000){
+    if(millis()-prev > 500){
       target_on();
       prev = millis();
     }
     delay(40);
   }
 }
+//
+//void mode2(){
+//  while(true){
+//      if (digitalRead(4) == LOW) {
+//          digitalWrite(13, HIGH);
+//      } else {
+//          digitalWrite(13, LOW);
+//      }
+//  }
+//}
+
 
 void mode2(){
   bool cont = true;
@@ -116,8 +127,7 @@ void mode2(){
         irrecv.resume();
       }
     }
-    if(digitalRead(TARGET0)){
-      delay(1000);
+    if(digitalRead(SWITCH) == LOW){
       target_on();
     }
     delay(40);
