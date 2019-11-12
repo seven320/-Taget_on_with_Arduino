@@ -55,11 +55,13 @@ void setup() {
 }
 
 void target_on(){
+  digitalWrite(LED3, HIGH);
   Serial.println("target on!");
   servo1.write(20);
   delay(1000);
   servo1.write(180);
   delay(1000);
+  digitalWrite(LED3, LOW);
   digitalWrite(SERVO,LOW); // stop servo motor 
 }
 
