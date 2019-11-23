@@ -65,6 +65,17 @@ void target_on(){
   digitalWrite(SERVO,LOW); // stop servo motor 
 }
 
+void target_on_adjust(int base){
+  digitalWrite(LED3, HIGH);
+  Serial.println("target on!");
+  servo1.write(base + 20);
+  delay(1000);
+  servo1.write(base + 180);
+  delay(1000);
+  digitalWrite(LED3, LOW);
+  digitalWrite(SERVO,LOW); // stop servo motor 
+}
+
 void check_motor(){
   if(servo1.read() < 170){ // position check 
     servo1.write(180);
@@ -128,6 +139,36 @@ void mode1(){
   }
 }
 
+void mode1_1(){
+  bool cont = true;
+  unsigned long prev = millis();
+  int base = 0;
+  while(cont){
+    if(irrecv.decode(&results)){
+      Serial.println(results.value, HEX);
+      long ir_signal = results.value;
+      if(ir_signal == ir_0 | ir_signal == ir_1 | ir_signal == ir_power | ir_signal == ir_2 || ir_signal == ir_3){
+        if(ir_signal == ir_1){
+          Serial.println("mode2");
+        }else if(ir_signal == ir_2){
+          base += 10;
+        }else if(ir_signal == ir_3){
+          base -= 10;
+        }else{
+          cont = false;
+          Serial.println("change mode");
+        }
+      }
+      irrecv.resume();
+    }
+    if(cont && millis()-prev > 5000){
+      target_on_adjust(base);
+      prev = millis();
+    }
+    delay(40);
+  }
+}
+
 //void mode2(){
 //  bool cont = true;
 //  while(cont){
@@ -179,7 +220,7 @@ void loop(){
   }
   if(power){
     if(mode == 0){
-      mode0();
+      mode1_1();
     }else if(mode == 1){
       mode1();
     }
