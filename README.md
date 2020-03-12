@@ -18,7 +18,9 @@ Servo.h
 IRremoteInt.h
 IRremote
 ```
-set pin and servo moter
+make board following below
+
+https://user-images.githubusercontent.com/33506506/76436089-2b24e200-63fb-11ea-857b-5c4e058fae1f.png
 
 change IR sensor signal which is depend on your remote controller(you can see it by arduino IDE)
 
