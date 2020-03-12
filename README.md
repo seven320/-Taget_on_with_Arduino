@@ -6,9 +6,9 @@ I hope you will enjoy it!!
 
 
 ## Getting Started
-buy arduino UNO R3 starter kit[amazon link](https://www.amazon.co.jp/s?k=arduiono&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&ref=nb_sb_noss_1)
+buy arduino UNO R3 starter kit [amazon link](https://www.amazon.co.jp/s?k=arduiono&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&ref=nb_sb_noss_1)
 
-then download aruduino IDE[link](https://www.arduino.cc/en/Main/Software)
+then download aruduino IDE [link](https://www.arduino.cc/en/Main/Software)
 
 git clone this repository and write target/target.ino to your arduino!!
 
@@ -18,7 +18,9 @@ Servo.h
 IRremoteInt.h
 IRremote
 ```
-set pin and servo moter
+make board following below
+
+https://user-images.githubusercontent.com/33506506/76436089-2b24e200-63fb-11ea-857b-5c4e058fae1f.png
 
 change IR sensor signal which is depend on your remote controller(you can see it by arduino IDE)
 
